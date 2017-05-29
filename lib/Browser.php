@@ -264,9 +264,9 @@ class Browser
     }
 
     /**
-    * Is the browser from facebook?
-    * @return boolean True if the browser is from facebook otherwise false
-    */
+     * Is the browser from facebook?
+     * @return boolean True if the browser is from facebook otherwise false
+     */
     public function isFacebook()
     {
         return $this->_is_facebook;
@@ -354,9 +354,9 @@ class Browser
     public function __toString()
     {
         return "<strong>Browser Name:</strong> {$this->getBrowser()}<br/>\n" .
-        "<strong>Browser Version:</strong> {$this->getVersion()}<br/>\n" .
-        "<strong>Browser User Agent String:</strong> {$this->getUserAgent()}<br/>\n" .
-        "<strong>Platform:</strong> {$this->getPlatform()}<br/>";
+               "<strong>Browser Version:</strong> {$this->getVersion()}<br/>\n" .
+               "<strong>Browser User Agent String:</strong> {$this->getUserAgent()}<br/>\n" .
+               "<strong>Platform:</strong> {$this->getPlatform()}<br/>";
     }
 
     /**
@@ -592,19 +592,19 @@ class Browser
      */
     protected function checkBrowserEdge()
     {
-      if( stripos($this->_agent,'Edge/') !== false ) {
-	    	$aresult = explode('/', stristr($this->_agent, 'Edge'));
-    		if (isset($aresult[1])) {
-            $aversion = explode(' ', $aresult[1]);
-            $this->setVersion($aversion[0]);
-            $this->setBrowser(self::BROWSER_EDGE);
-            if(stripos($this->_agent, 'Windows Phone') !== false || stripos($this->_agent, 'Android') !== false) {
-                $this->setMobile(true);
+        if( stripos($this->_agent,'Edge/') !== false ) {
+            $aresult = explode('/', stristr($this->_agent, 'Edge'));
+            if (isset($aresult[1])) {
+                $aversion = explode(' ', $aresult[1]);
+                $this->setVersion($aversion[0]);
+                $this->setBrowser(self::BROWSER_EDGE);
+                if(stripos($this->_agent, 'Windows Phone') !== false || stripos($this->_agent, 'Android') !== false) {
+                    $this->setMobile(true);
+                }
+                return true;
             }
-            return true;
         }
-      }
-      return false;
+        return false;
     }
 
     /**
@@ -613,12 +613,12 @@ class Browser
      */
     protected function checkBrowserInternetExplorer()
     {
-	//  Test for IE11
-	if( stripos($this->_agent,'Trident/7.0; rv:11.0') !== false ) {
-		$this->setBrowser(self::BROWSER_IE);
-		$this->setVersion('11.0');
-		return true;
-	}
+        //  Test for IE11
+        if( stripos($this->_agent,'Trident/7.0; rv:11.0') !== false ) {
+            $this->setBrowser(self::BROWSER_IE);
+            $this->setVersion('11.0');
+            return true;
+        }
         // Test for v1 - v1.5 IE
         else if (stripos($this->_agent, 'microsoft internet explorer') !== false) {
             $this->setBrowser(self::BROWSER_IE);
@@ -650,14 +650,14 @@ class Browser
                 return true;
             }
         } // Test for versions > IE 10
-		else if(stripos($this->_agent, 'trident') !== false) {
-			$this->setBrowser(self::BROWSER_IE);
-			$result = explode('rv:', $this->_agent);
+        else if(stripos($this->_agent, 'trident') !== false) {
+            $this->setBrowser(self::BROWSER_IE);
+            $result = explode('rv:', $this->_agent);
             if (isset($result[1])) {
                 $this->setVersion(preg_replace('/[^0-9.]+/', '', $result[1]));
                 $this->_agent = str_replace(array("Mozilla", "Gecko"), "MSIE", $this->_agent);
             }
-		} // Test for Pocket IE
+        } // Test for Pocket IE
         else if (stripos($this->_agent, 'mspie') !== false || stripos($this->_agent, 'pocket') !== false) {
             $aresult = explode(' ', stristr($this->_agent, 'mspie'));
             if (isset($aresult[1])) {
