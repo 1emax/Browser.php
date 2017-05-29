@@ -12,6 +12,7 @@
             "homepage": "http://chrisschuld.com"
         }
     ],
+    "minimum-stability": "stable",
     "autoload": {
         "files": ["lib/Browser.php"]
     },
